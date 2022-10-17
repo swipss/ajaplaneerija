@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ajaplaneerija</title>
+    <link rel="stylesheet" href="../static/css/style.css" />
+  </head>
+
+  <body>
+    {% block body %}
+    <h1>Ajaplaneerija</h1>
+    <h2>Kirjuta uus tegevus:</h2>
+    <div class="container">
+      <div>
+        <form action="/" method="POST">
+          Pealkiri: <input type="text" name="title" id="title" />
+          <br />
+          Sisu: <input type="text" name="content" id="content" />
+          <br />
+          Kategooria:
+          <select name="category" id="category">
+            <option value=""></option>
+            <option>Kool</option>
+            <option>Kodu</option>
+            <option>Töö</option>
+            <option>Tähtpäevad</option>
+          </select>
+          <br />
+          <input type="date" id="due" name="due" />
+          <br />
+          Tähtaeg<input type="submit" value="Saada" />
+        </form>
+      </div>
+      <div class="activities">
+        {% endblock %} {% for tegevus in tegevused %}
+        <div class="activity">
+          <button type="button" class="check">a</button>
+          <div>
+            <div>
+              <h2>{{ tegevus.title }}</h2>
+              <p>Sisu: {{ tegevus.content }}</p>
+            </div>
+            <div class="info">
+              <p>{{ tegevus.category }}</p>
+              <p>
+                {{ tegevus.due.strftime('%d/%m') }}
+              </p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </body>
+</html>
