@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ajaplaneerija</title>
+    <link rel="stylesheet" href="../static/css/style.css" />
+  </head>
+
+  <body>
+    {% block body %}
+    <h1>Ajaplaneerija</h1>
+    <br/>
+    <h2>Kirjuta uus tegevus:</h2>
+    <br/>
+    <div class="container">
+      <div class="form">
+        <form action="/" method="POST">
+          Pealkiri: <input type="text" name="title" id="title" class="ankeet"/>
+          <br />
+          Sisu: <input type="text" name="content" id="content" class="ankeet"/>
+          <br />
+          Kategooria:
+          <select name="category" id="category" class="ankeet">
+            <option value=""></option>
+            <option>Kool</option>
+            <option>Kodu</option>
+            <option>Töö</option>
+            <option>Tähtpäevad</option>
+          </select>
+          <br />
+          Tähtaeg
+          <input type="date" id="due" name="due" class="ankeet"/>
+          <br />
+          <input type="submit" value="+" class="nupp"/>
+        </form>
+      </div>
+      <div class="activities">
+        {% endblock %} {% for tegevus in tegevused %}
+        <form
+          class="activity"
+          method="POST"
+          action="{{ url_for('complete_activity', activity_id=tegevus.id) }}"
+        >
+          <input
+            type="submit"
+            class="check-btn {{'check-btn-completed check-btn' if tegevus.completed == true}}"
+            value=""
+          />
+          <div>
+            <div>
+              <h2>{{ tegevus.title }}</h2>
+              <p>{{ tegevus.content }}</p>
+            </div>
+            <div class="info">
+              <p style="color: #20dd77">{{ tegevus.due.strftime('%d.%m') }}</p>
+              <p style="color: #fcf206">{{ tegevus.category }}</p>
+            </div>
+          </div>
+        </form>
+        {% endfor %}
+      </div>
+    </div>
+  </body>
+</html>
