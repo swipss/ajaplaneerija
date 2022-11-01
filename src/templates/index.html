@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ajaplaneerija</title>
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <script
+      src="https://kit.fontawesome.com/161e0aa7c8.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    {% block body %}
+    <h1>Ajaplaneerija</h1>
+    <br />
+    <h2>Kirjuta uus tegevus:</h2>
+    <br />
+    <div class="container">
+      <div class="form">
+        <form action="/" method="POST">
+          Pealkiri:
+          <input type="text" name="title" id="title" class="ankeet" required />
+          <br />
+          Sisu:
+          <input
+            type="text"
+            name="content"
+            id="content"
+            class="ankeet"
+            required
+          />
+          <br />
+          Kategooria:
+          <select name="category" id="category" class="ankeet">
+            <option></option>
+            <option value="Kool">Kool</option>
+            <option value="Kodu">Kodu</option>
+            <option value="Töö">Töö</option>
+            <option value="Tervis">Tervis</option>
+            <option value="Tähtpäevad">Tähtpäevad</option>
+            <option value="">Muu</option>
+          </select>
+          <label
+            for="custom_category"
+            id="custom-category-label"
+            style="display: none"
+            >Täpsusta</label
+          >
+          <input
+            style="display: none"
+            type="text"
+            name="custom_category"
+            id="custom_category"
+            class="ankeet"
+          />
+          <br />
+          Tähtaeg
+          <input type="date" id="due" name="due" class="ankeet" required />
+          <br />
+          <input type="submit" value="+" class="nupp" />
+        </form>
+      </div>
+      <div class="activities">
+        {% endblock %} {% for tegevus in tegevused %}
+        <form
+          class="activity"
+          method="POST"
+          action="{{ url_for('complete_activity', activity_id=tegevus.id) }}"
+        >
+          <input
+            type="submit"
+            class="check-btn {{'check-btn-completed check-btn' if tegevus.completed == true}}"
+            value=""
+          />
+          <div>
+            <button
+              class="delete-btn"
+              type="submit"
+              style="position: absolute; top: 10px; right: 10px"
+              formaction="{{ url_for('delete_activity', activity_id=tegevus.id) }}"
+            >
+              <i class="fa-solid fa-trash"></i>
+            </button>
+            <div>
+              <h2>{{ tegevus.title }}</h2>
+              <p>{{ tegevus.content }}</p>
+            </div>
+            <div class="info">
+              <p style="color: #20dd77">{{ tegevus.due.strftime('%d.%m') }}</p>
+              {% if tegevus.category %}
+              <p style="color: #fcf206">{{ tegevus.category }}</p>
+              {% endif %} {% if tegevus.custom_category %}
+              <p style="color: #fcf206">{{ tegevus.custom_category }}</p>
+              {% endif %}
+            </div>
+          </div>
+        </form>
+        {% endfor %}
+      </div>
+    </div>
+    <script>
+      const selectInput = document.getElementById("category");
+      const customCategoryInput = document.getElementById("custom_category");
+      const customCategoryLabel = document.getElementById(
+        "custom-category-label"
+      );
+      selectInput.addEventListener("change", () => {
+        if (selectInput.value === "") {
+          customCategoryInput.style.display = null;
+          customCategoryLabel.style.display = null;
+          console.log("muu");
+        } else {
+          customCategoryInput.style.display = "none";
+          customCategoryLabel.style.display = "none";
+          customCategoryInput.value = null;
+        }
+      });
+    </script>
+  </body>
+</html>

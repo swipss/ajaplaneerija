@@ -1,0 +1,131 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins";
+  color: white;
+  background-color: #17181f;
+  padding: 50px;
+  width: 70%;
+}
+
+h1 {
+  color: #fb76a1;
+  font-size: 32px;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form {
+  width: 100%;
+}
+
+.activities {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 700px;
+  margin: 20px;
+}
+
+.activity {
+  background: #21212b;
+  border-radius: 20px;
+  display: flex;
+  padding: 20px;
+  gap: 16px;
+  position: relative;
+}
+
+.activity div div:first-child p {
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.check-btn {
+  height: 25px;
+  min-width: 25px !important;
+  border: 3px solid #fb76a1;
+  background: none;
+  border-radius: 10px;
+}
+
+.check-btn-completed {
+  background-color: #20dd77;
+  border-color: #20dd77;
+  box-shadow: 0px 4px 30px rgba(32, 221, 119, 0.41);
+}
+
+.info {
+  display: flex;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.ankeet {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  color: white;
+  background-color: #17181f;
+  border-color: #21212b;
+  border-style: solid;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-family: "Poppins";
+}
+
+::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+select {
+  padding: 10px;
+}
+
+.nupp {
+  width: 100%;
+  text-align: center;
+  font-size: 2em;
+  padding: 10px 10px;
+  background-color: #17181f;
+  color: white;
+  font-family: "Poppins";
+  margin: 8px 0;
+  border: 0;
+  border-radius: 5px;
+  transition: 0.4s;
+}
+
+.nupp:hover {
+  background-color: #20dd77;
+  transition: 0.4s;
+}
+
+.delete-btn {
+  background-color: transparent;
+  border: solid transparent;
+  width: 25px;
+  height: 25px;
+  font-size: 8px;
+  font-weight: bold;
+  color: white;
+  border-radius: 10px;
+}
+
+.delete-btn:hover {
+  background-color: rgba(255, 0, 0, 0.4);
+  transition: 0.4s;
+}
